@@ -8,6 +8,14 @@ class Location(models.Model):
     """
     name = models.CharField(max_length = 80)
     description = models.TextField()
+    
+    def save_location(self):
+        """
+        save_location method to enable saving of an image's 
+        location to the database
+        """
+        self.save()
+        
 
 class Category(models.Model):
     """
