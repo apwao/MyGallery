@@ -16,6 +16,13 @@ class Location(models.Model):
         """
         self.save()
         
+    def delete_location(self):
+        """
+        delete_location method to remove a location from the database
+        """
+        self.delete()
+        
+        
 
 class Category(models.Model):
     """
