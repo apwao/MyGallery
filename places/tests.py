@@ -37,5 +37,16 @@ class LocationTestClass(TestCase):
         """
         self.santorini.save_location()
         self.santorini.delete_location()
-        locations.objects.all()
-        self.assertTrue(len(locations)=0)
+        locations=Location.objects.all()
+        self.assertTrue(len(locations)<1)
+        
+    def test_display_locations(self):
+        """
+        test_display_locations method to check whether all the locations saved 
+        in the database can be displayed
+        """
+        self.santorini.save_location()
+        location2=Location(name='cairo',description='the sandy dunes of the Arabian Desert')
+        location2.save_location()
+        locations=Location.objects.all()
+        self.assertTrue(len(locations)>1)
