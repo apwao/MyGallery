@@ -26,3 +26,16 @@ class LocationTestClass(TestCase):
         test_save_method to check whether an instance of loation
         is successfully stored to the database
         """
+        self.santorini.save_location()
+        locations=Location.objects.all()
+        self.assertTrue(len(locations)>0)
+        
+    def test_delete_method(self):
+        """
+        test_delete_method to check whether an instance of location
+        is successfully deleted from the database once it has been stored
+        """
+        self.santorini.save_location()
+        self.santorini.delete_location()
+        locations.objects.all()
+        self.assertTrue(len(locations)=0)
