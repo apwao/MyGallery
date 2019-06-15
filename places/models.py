@@ -81,11 +81,11 @@ class tags(models.Model):
         """
         self.save()
         
-    # def delete_image(self):
-    #     """
-    #     delete_image method to remove an image from the database
-    #     """
-    #     self.delete()
+    def delete_image(self):
+        """
+        delete_tag method to remove a tag from the database
+        """
+        self.delete()
         
     # def edit_image(self):
     #     """
