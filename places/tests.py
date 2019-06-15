@@ -50,3 +50,18 @@ class LocationTestClass(TestCase):
         location2.save_location()
         locations=Location.objects.all()
         self.assertTrue(len(locations)>1)
+        
+    def test_edit_location(self):
+        """
+        test_edit_location method to check whether it is possible
+        to update a single location 
+        """
+        self.santorini.save_location()
+        locations=Location.objects.filter(id=1).update(name='malibu')
+        self.assertEqual(locations.name, 'malibu')
+    
+class CategoryTestClass(TestCase):
+    """
+    class CategoryTestClass  to test the correct instantiation and functioning of the 
+    Category class
+    """
