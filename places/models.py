@@ -103,11 +103,11 @@ class Image(models.Model):
         """
         self.save()
         
-    # def delete_location(self):
-    #     """
-    #     delete_location method to remove a location from the database
-    #     """
-    #     self.delete()
+    def delete_image(self):
+        """
+        delete_image method to remove an image from the database
+        """
+        self.delete()
         
     # def edit_location(self):
     #     """
