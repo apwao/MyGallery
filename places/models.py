@@ -109,11 +109,12 @@ class Image(models.Model):
         """
         self.delete()
         
-    # def edit_location(self):
-    #     """
-    #     edit_location method to change the name of a location in the database
-    #     """
-    #     self.update()
+    def edit_image(self):
+        """
+        edit_image method to replace an existing image in the database
+        with a different one
+        """
+        self.update()
         
     # def display_location(self):
     #     """
