@@ -65,3 +65,17 @@ class CategoryTestClass(TestCase):
     class CategoryTestClass  to test the correct instantiation and functioning of the 
     Category class
     """
+    def setUp(self):
+        """
+        setUp method to create an instance of Location
+        class to be used during testing
+        """
+        self.adventure=Category(name='adventurous')
+    
+    def test_instance(self):
+        """
+        test_instance method to check for the correct creation of 
+        an instance of Category
+        """ 
+        self.assertTrue(isinstance(self.adventure,Category))  
+    
