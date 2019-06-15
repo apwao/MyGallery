@@ -99,3 +99,12 @@ class CategoryTestClass(TestCase):
         category2.save_category()
         categories=category2.objects.all()
         self.assertTrue(len(categories)>1)
+        
+    def test_edit_category(self):
+        """
+        test_edit_category method to check whether it is possible
+        to update a single category 
+        """
+        self.adventure.save_category()
+        categories=Category.objects.filter(id=1).update(name='adventure')
+        self.assertEqual(categories.name, 'adventure')
