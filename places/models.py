@@ -116,10 +116,10 @@ class Image(models.Model):
         """
         self.update()
         
-    # def display_location(self):
-    #     """
-    #     display_location method to display all the locations saved in the database
-    #     """
-    #     self.get()
+    def display_images(self):
+        """
+        display_images method to display all the images saved in the database
+        """
+        self.get()
         
     
