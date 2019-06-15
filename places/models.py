@@ -96,4 +96,29 @@ class Image(models.Model):
         """
         ordering = ['id']
         
+    def save_image(self):
+        """
+        save_image method to enable saving of an image
+        to the database
+        """
+        self.save()
+        
+    # def delete_location(self):
+    #     """
+    #     delete_location method to remove a location from the database
+    #     """
+    #     self.delete()
+        
+    # def edit_location(self):
+    #     """
+    #     edit_location method to change the name of a location in the database
+    #     """
+    #     self.update()
+        
+    # def display_location(self):
+    #     """
+    #     display_location method to display all the locations saved in the database
+    #     """
+    #     self.get()
+        
     
