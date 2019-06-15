@@ -37,6 +37,14 @@ class Category(models.Model):
     """
     name = models.CharField(max_length=80)
     
+    def save_category(self):
+        """
+        save_category method to enable saving of an image's 
+        category to the database
+        """
+        self.save()
+        
+    
 class tags(models.Model):
     """
     Tags class to create instances of tags for every image 
