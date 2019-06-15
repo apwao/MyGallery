@@ -88,3 +88,14 @@ class CategoryTestClass(TestCase):
         self.adventure.delete_category()
         categories=Category.objects.all()
         self.assertTrue(len(categories)<1)
+        
+    def test_display_categories(self):
+        """
+        test_display_categories method to check whether all the categories saved 
+        in the database can be displayed
+        """
+        self.adventure.save_category()
+        category2=Category(name='serenity')
+        category2.save_category()
+        categories=category2.objects.all()
+        self.assertTrue(len(categories)>1)
