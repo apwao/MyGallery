@@ -13,6 +13,11 @@ class LocationTestClass(TestCase):
         class to be used during testing
         """
         self.santorini=Location(name='Santorini',description='The warm sunny beaches of Greece')
+    def tearDown(self):
+        """
+        tearDown method to create an clear the database after tests for each class are run
+        """
+        Location.objects.all().delete()
     
     def test_instance(self):
         """
@@ -57,8 +62,9 @@ class LocationTestClass(TestCase):
         to update a single location 
         """
         self.santorini.save_location()
-        locations=Location.objects.filter(id=1).update(name='malibu')
-        self.assertEqual(locations.name, 'malibu')
+        locations=Location.objects.filter(name='Santorini').update(name='malibu')
+        self.assertEquals(locations, 1)
+        
     
 class CategoryTestClass(TestCase):
     """
@@ -71,7 +77,12 @@ class CategoryTestClass(TestCase):
         class to be used during testing
         """
         self.adventure=Category(name='adventurous')
-    
+    def tearDown(self):
+        """
+        tearDown method to create an clear the database after tests for each class are run
+        """
+        Category.objects.all().delete()
+
     def test_instance(self):
         """
         test_instance method to check for the correct creation of 
@@ -86,7 +97,7 @@ class CategoryTestClass(TestCase):
         """
         self.adventure.save_category()
         categories=Category.objects.all()
-        self.assertTrue(len(locations)>0)
+        self.assertTrue(len(categories)>0)
     
     def test_delete_category(self):
         """
@@ -115,8 +126,8 @@ class CategoryTestClass(TestCase):
         to update a single category 
         """
         self.adventure.save_category()
-        categories=Category.objects.filter(id=1).update(name='adventure')
-        self.assertEqual(categories.name, 'adventure')
+        categories=Category.objects.filter(name="adventurous").update(name='adventure')
+        self.assertEquals(categories, 1)
         
 class TesttagsClass(TestCase):
     """
@@ -124,11 +135,16 @@ class TesttagsClass(TestCase):
     instances of tags
     """ 
     def setUp(self):
-    """
-    setUp method to create an instance of class tags to
-    use during testing
-    """
-    self.adrenaline_junkie=tags('name'='adrenaline_junkie')
+        """
+        setUp method to create an instance of class tags to
+        use during testing
+        """
+        self.adrenaline_junkie=tags(name='adrenaline_junkie')
+    def tearDown(self):
+        """
+        tearDown method to create an clear the database after tests for each class are run
+        """
+        tags.objects.all().delete() 
     
     def test_instance(self):
         """
@@ -143,7 +159,7 @@ class TesttagsClass(TestCase):
         """
         self.adrenaline_junkie.save_tag()
         tag=tags.objects.all()
-        self.assertTrue(len(tags)>0)
+        self.assertTrue(len(tag)>0)
         
     def test_delete_tag(self):
         """
@@ -153,16 +169,16 @@ class TesttagsClass(TestCase):
         self.adrenaline_junkie.save_tag()
         self.adrenaline_junkie.delete_tag()
         tag=tags.objects.all()
-        self.assertTrue(len(tags)<1)
+        self.assertTrue(len(tag)<1)
         
     def test_display_tags(self):
         """
         test_display_tags method to check whether all the tags saved 
         in the database can be displayed
         """
-        self.adrenaline_junkie.save_tags()
+        self.adrenaline_junkie.save_tag()
         tag2=tags(name='serenity')
-        tag2.save_category()
+        tag2.save_tag()
         tagies=tags.objects.all()
         self.assertTrue(len(tagies)>1)
         
@@ -172,8 +188,8 @@ class TesttagsClass(TestCase):
         to update a single tags 
         """
         self.adrenaline_junkie.save_tag()
-        tagies=tags.objects.filter(id=1).update(name='vicarious')
-        self.assertEquals(tagies.name, 'vicarious')
+        tagies=tags.objects.filter(name='adrenaline_junkie').update(name='vicarious')
+        self.assertEquals(tagies, 1)
         
             
           
@@ -187,11 +203,19 @@ class TestImageClass(TestCase):
         setUp method to create an instance of image to
         use during testing
         """
-        self.athens=Location(name='athens',description='the colosseum in Greece')
-        self.architecture=tags(name='architecture')
-        self.travel=Category(name='travel')
-        self.unforgettable = Image(image_name='unforgettable',description='where the sky meets the earth',location=self.athens,category=self.travel,tags=self.architecture)
-        
+        self.athens=Location(name='athens',description='the colosseum in Greece', id=1)
+        self.architecture=tags(name='architecture', id=1)
+        self.travel=Category(name='travel',id=1)
+        self.unforgettable = Image(image_name='unforgettable',description='where the sky meets the earth',location=self.athens,category=self.travel,)
+    
+    def tearDown(self):
+        """
+        tearDown method to create an clear the database after tests for each class are run
+        """
+        Location.objects.all().delete()
+        tags.objects.all().delete()
+        Category.objects.all().delete()
+        Image.objects.all().delete()
         
     
     def test_instance(self):
@@ -206,7 +230,7 @@ class TestImageClass(TestCase):
         test_ave_image method to enable saving of an image all
         its details to the database
         """
-        self.Image.save_image()
+        self.unforgettable.save_image()
         images=Image.objects.all()
         self.assertTrue(len(images)>0)
         
@@ -216,9 +240,10 @@ class TestImageClass(TestCase):
         is successfully deleted from the database once it has been stored
         """
         self.unforgettable.save_image()
-        self.unforgattable.delete_image()
+        self.unforgettable.delete_image()
         images=Image.objects.all()
-        self.assertTrue(len(images)<1)
+        # self.assertTrue(len(images)<1)
+        self.assertEquals(len(images), 0)
         
     def test_display_image(self):
         """
@@ -227,10 +252,13 @@ class TestImageClass(TestCase):
         """
         self.unforgettable.save_image()
         self.zanzibar=Location(name='zanzibar',description='the sandy beaches of Zanzibar')
+        self.zanzibar.save_location()
         self.nature=tags(name='nature')
+        self.nature.save_tag()
         self.outdoors=Category(name='outdoors')
-        self.outdoor_adventure = Image(image_name='outdoor_adventure',description='me and the deep blue sea',location=self.zanzibar,category=self.outdoor,tags=self.nature)
-        outdoor_adventure.save_image()
+        self.outdoors.save_category()
+        self.outdoor_adventure = Image(image_name='outdoor_adventure',description='me and the deep blue sea',location=self.zanzibar,category=self.outdoors)
+        self.outdoor_adventure.save_image()
         images2=Image.objects.all()
         self.assertTrue(len(images2)>1)
         
@@ -240,6 +268,6 @@ class TestImageClass(TestCase):
         to replace an existing image with a new one
         """
         self.unforgettable.save_image()
-        images3=Image.objects.filter(id=1).update(name='divina')
-        self.assertEquals(images3.name, 'divina')
+        images3=Image.objects.filter(image_name='unforgettable').update(image_name='divina')
+        self.assertEquals(images3, 1)
         

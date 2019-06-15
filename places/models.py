@@ -93,13 +93,6 @@ class tags(models.Model):
         with a different one
         """
         self.update()
-        
-    def display_tags(self):
-        """
-        display_tags method to display all the tags associated with a given image
-        saved in the database
-        """
-        self.get()
       
 # Image Model
 class Image(models.Model):
