@@ -44,6 +44,11 @@ class Category(models.Model):
         """
         self.save()
         
+    def delete_category(self):
+        """
+        delete_category method to remove a category from the database
+        """
+        self.delete()
     
 class tags(models.Model):
     """
