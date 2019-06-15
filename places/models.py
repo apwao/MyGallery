@@ -28,6 +28,12 @@ class Location(models.Model):
         """
         self.update()
         
+    def display_location(self):
+        """
+        display_location method to display all the locations saved in the database
+        """
+        self.get()
+        
         
 
 class Category(models.Model):
@@ -49,6 +55,18 @@ class Category(models.Model):
         delete_category method to remove a category from the database
         """
         self.delete()
+        
+    def display_categories(self):
+        """
+        display_category method to display all the categories saved in the database
+        """
+        self.get()
+        
+    def edit_category(self):
+        """
+        display_category method to display all the categories saved in the database
+        """
+        self.get()
     
 class tags(models.Model):
     """
