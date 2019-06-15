@@ -22,6 +22,12 @@ class Location(models.Model):
         """
         self.delete()
         
+    def edit_location(self):
+        """
+        edit_location method to change the name of a location in the database
+        """
+        self.update()
+        
         
 
 class Category(models.Model):
