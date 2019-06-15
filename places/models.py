@@ -74,6 +74,31 @@ class tags(models.Model):
     to enable filtering of the images based on their tag names
     """
     name= models.CharField(max_length = 30)
+    def save_tag(self):
+        """
+        save_tag method to enable saving of an image's tag
+        to the database
+        """
+        self.save()
+        
+    # def delete_image(self):
+    #     """
+    #     delete_image method to remove an image from the database
+    #     """
+    #     self.delete()
+        
+    # def edit_image(self):
+    #     """
+    #     edit_image method to replace an existing image in the database
+    #     with a different one
+    #     """
+    #     self.update()
+        
+    # def display_images(self):
+    #     """
+    #     display_images method to display all the images saved in the database
+    #     """
+    #     self.get()
       
 # Image Model
 class Image(models.Model):
