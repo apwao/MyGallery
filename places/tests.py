@@ -30,9 +30,9 @@ class LocationTestClass(TestCase):
         locations=Location.objects.all()
         self.assertTrue(len(locations)>0)
         
-    def test_delete_method(self):
+    def test_delete_location(self):
         """
-        test_delete_method to check whether an instance of location
+        test_delete_location to check whether an instance of location
         is successfully deleted from the database once it has been stored
         """
         self.santorini.save_location()
@@ -79,3 +79,12 @@ class CategoryTestClass(TestCase):
         """ 
         self.assertTrue(isinstance(self.adventure,Category))  
     
+    def test_delete_category(self):
+        """
+        test_delete_category to check whether an instance of category
+        is successfully deleted from the database once it has been stored
+        """
+        self.adventure.save_category()
+        self.adventure.delete_category()
+        categories=Category.objects.all()
+        self.assertTrue(len(categories)<1)
