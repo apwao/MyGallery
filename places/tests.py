@@ -207,7 +207,7 @@ class TestImageClass(TestCase):
         self.architecture=tags(name='architecture', id=1)
         self.travel=Category(name='travel',id=1)
         self.unforgettable = Image(image_name='unforgettable',description='where the sky meets the earth',location=self.athens,category=self.travel,)
-    
+        # self.unforgettable.tags.add(self.architecture)
     def tearDown(self):
         """
         tearDown method to create an clear the database after tests for each class are run
