@@ -1,4 +1,5 @@
 from django.db import models
+import datetime as dt
 
 class Location(models.Model):
     """
@@ -33,6 +34,10 @@ class Location(models.Model):
         display_location method to display all the locations saved in the database
         """
         self.get()
+    
+    
+    def __str__(self):
+        return self.name
         
         
 
@@ -67,13 +72,15 @@ class Category(models.Model):
         display_category method to display all the categories saved in the database
         """
         self.get()
+    def __str__(self):
+        return self.name
     
 class tags(models.Model):
     """
     Tags class to create instances of tags for every image 
     to enable filtering of the images based on their tag names
     """
-    name= models.CharField(max_length = 30)
+    name= models.CharField(max_length = 30,blank=True)
     def save_tag(self):
         """
         save_tag method to enable saving of an image's tag
@@ -93,6 +100,8 @@ class tags(models.Model):
         with a different one
         """
         self.update()
+    def __str__(self):
+        return self.name
       
 # Image Model
 class Image(models.Model):
@@ -107,13 +116,14 @@ class Image(models.Model):
     category = models.ForeignKey(Category)
     tags=models.ManyToManyField(tags)
     pub_date=models.DateTimeField(auto_now_add=True)
+    image=models.ImageField(upload_to = 'photos/')
     
     class Meta:
         """
         Meta subclass to specify model-specific options
         such as the ordering format whenever the database is queried
         """
-        ordering = ['id']
+        ordering = ['location']
         
     def save_image(self):
         """
@@ -135,10 +145,39 @@ class Image(models.Model):
         """
         self.update()
         
-    def display_images(self):
+    @classmethod    
+    def display_images(cls):
         """
         display_images method to display all the images saved in the database
         """
-        self.get()
+        cls.objects.all()
         
     
+    # @classmethod
+    # def filter_by_location(cls,location):
+    #     """
+    #     display_by_location method to display all the images in the
+    #     database associated with a specific location
+    #     """
+    #     # location=Location()
+    #     image_locations=cls.objects.filter(location=location)
+    
+    @classmethod
+    def search_by_category(cls,category):
+        """
+        method search_by_category to query the database and return the 
+        images associated with the searched category
+        """
+        image_categories = cls.objects.filter(category=category)
+        return image_categories
+    
+    @classmethod
+    def filter_by_location(cls):
+        """
+        """
+        location_pics=Image.objects.order_by(location)
+        return location_pics
+        
+     
+    def __str__(self):
+        return self.image_name
