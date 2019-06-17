@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+{% block content %}
+<div class="container">
+  <hr>
+  <div class="row" style="padding:2em;">
+
+      {% for image in images %}
+      <div class="col-md-4 column card" style="display: flex;flex-direction: column ;" >
+          <h3>{{image.image_name}}</h3> 
+          <img src="{{image.image.url}}" class="selectedImage image" width=300>
+          
+         
+      </div>
+      
+      <div id="myModal" class="modal col-md-6 column" style="margin-left:30%;">
+        <!-- The Close Button -->
+        <span class="close">&times;</span>
+        
+        <!-- Modal Content (The Image) -->
+        <img src='' class="modal-content" id="modal-con" width=100>
+        <div class="modal-content text-center">
+            <h4> <strong>Description:</strong> {{image.description}}</h4>
+            <h6> <strong>Location:</strong> {{image.location}}</h6>
+            <h6> <strong>Category:</strong> {{image.category}}</h6>
+            <input type="text" id="myInput">
+            <!-- <button onclick="myFunction()">Copy to clipboard</button> -->
+        </div>
+        
+      </div>
+        {% endfor %}
+      
+  
+    </div>
+</div>
+{% endblock %}
