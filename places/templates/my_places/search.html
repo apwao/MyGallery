@@ -1,0 +1,51 @@
+{%extends 'my_places/base.html'%} 
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <hr>
+  <div class="row">
+      {% for image in final_images %}
+      <!-- Card -->
+      <div class="card">
+              <!-- Card image -->
+          <div class="view overlay">
+              <img class="card-img-top img-responsive" src="{{image.image.url}}" alt="Card image cap">
+              <a href="#!">
+              <div class="mask rgba-white-slight"></div>
+              </a>
+          </div>
+            
+              <!-- Card content -->
+          <div class="card-body">
+          
+              <!-- Title -->
+              <h4 class="card-title">{{image.name}}</h4>
+              <!-- Text -->
+              <p class="card-text">Taken at: {{image.location}}</p>
+              <p class="card-text">Uploaded at: {{image.pub_date}}</p>
+              <p class="card-text">Description: {{image.location}}</p>
+              <!-- Button -->
+              <a href="#" class="btn btn-primary">Copy Link</a>
+          
+          </div>
+            
+      </div>
+      <!-- Card -->
+      {% endfor %}
+
+  </div>
+
+  <!-- <div class="row">
+
+  {% if articles %}
+    {% for article in articles %}
+      <div class="col-sm-6 col-md-3">
+          <h1>{{article.title}}</h1>
+      </div>
+    {% endfor %}
+  {% endif %}
+  </div> -->
+</div>
+{% endblock %}
