@@ -1,0 +1,56 @@
+{% extends 'my_places/base.html' %}
+{% include 'my_places/navbar.html'%}
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+ -->
+
+{% block content %}
+<body>
+	<div class="container">
+		<div class="row">
+			{% for image in images %}
+			<div class='col-md-3'></div>
+			<div class="col-md-6">
+			<!-- Card -->
+				<div class="card">
+
+						<!-- Card image -->
+					<div class="view overlay">
+						<img class="card-img-top img-responsive" src="{{image.image.url}}" alt="Card image cap">
+						<a href="#!">
+						<div class="mask rgba-white-slight"></div>
+						</a>
+					</div>
+					
+						<!-- Card content -->
+					<div class="card-body">
+					
+						<!-- Title -->
+						<h4 class="card-title">{{image.name}}</h4>
+						<!-- Text -->
+						<p class="card-text">Taken at: {{image.location}}</p>
+						<p class="card_text">Uploaded on: {{image.pub_date}} </p>
+						<!-- Button -->
+						<a href="#" class="btn btn-primary btn-sm">Copy Link</a>
+					
+					</div>
+					
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+			<hr>
+			<!-- Card -->
+			{% endfor %}
+		</div>
+	</div> 
+</body>
+{% endblock %}
+<!-- </body>
+</html> -->
