@@ -2,8 +2,15 @@
 {% load static %}
 
 {% block content %}
-
+<body background="https://images.pexels.com/photos/1509534/pexels-photo-1509534.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=650&w=940">
 <div class="container">
+  {% if final_images %}
+  <h2 style="color:antiquewhite; font-weight: bold;">Found {{final_images|length }} of searched term {{message}}</h2>
+  <hr>
+  {% else %}
+  <h2 style="color:antiquewhite;">Found 0 images for searched term</h2>
+  <hr>
+  {% endif %}
   <hr>
   <div class="row">
       {% for image in final_images %}
@@ -11,7 +18,7 @@
       <div class="card">
               <!-- Card image -->
           <div class="view overlay">
-              <img class="card-img-top img-responsive" src="{{image.image.url}}" alt="Card image cap">
+              <img style=" height: 300px; width:350px;"class="card-img-top img-responsive" src="{{image.image.url}}" alt="Card image cap">
               <a href="#!">
               <div class="mask rgba-white-slight"></div>
               </a>
@@ -21,7 +28,7 @@
           <div class="card-body">
           
               <!-- Title -->
-              <h4 class="card-title">{{image.name}}</h4>
+              <h4 class="card-title">{{image.image_name}}</h4>
               <!-- Text -->
               <p class="card-text">Taken at: {{image.location}}</p>
               <p class="card-text">Uploaded at: {{image.pub_date}}</p>
@@ -36,16 +43,6 @@
       {% endfor %}
 
   </div>
-
-  <!-- <div class="row">
-
-  {% if articles %}
-    {% for article in articles %}
-      <div class="col-sm-6 col-md-3">
-          <h1>{{article.title}}</h1>
-      </div>
-    {% endfor %}
-  {% endif %}
-  </div> -->
 </div>
+</body>
 {% endblock %}

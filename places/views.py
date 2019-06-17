@@ -32,11 +32,12 @@ def search_results(request):
         # extracting the id of the category to be used in filtering in the image class
         for category in searched_categories:
             category_id = category.id
+            # category_name=category.name
             print(category_id)
             # searching the db for all images bearing that specific id
-            searched_images=Image.search_by_category(category_id)    
+            searched_images=Image.search_by_category(category.id)    
             print(searched_images)
-            final_images.append(searched_images)        
+            final_images.extend(searched_images)        
                 
         message=f'{search_term}'
         return render(request, 'my_places/search.html',{'message':message,'final_images':final_images})
@@ -44,20 +45,7 @@ def search_results(request):
     else:
         message='You have not searched anything'
         return render(request, 'my_places/search.html',{"message":message})
-
-# def display_by_location():
-#     """
-#     display_by_location 
-#     """
-#     locations=Location.objects.all()
-#     return locations
     
-# def display_images_by_location():
-#     """
-#     """
-#     place_images=Image.objects.all()
-#     return place_images
-
 def view_by_location(request):
     """
     """
@@ -65,24 +53,3 @@ def view_by_location(request):
     images=Image.filter_by_location()
     
     return render(request, 'my_places/location.html',{'images':images,'locations':locations})
-
-# def single_image(request):
-    
-
-# def to_navbar():
-#     """
-#     """
-#     nav_locations=[]
-#     nav_categories=[]
-#     all_locations=Location.objects.all()
-#     all_categories = Category.objects.all()
-    
-#     for location in all_locations:
-#         if location.name not in all_locations:
-#             nav_locations.append(location.name)
-            
-#     for category in all_categories:
-#         if category.name not in all_categories:
-#             nav_categories.append(category.name)
-            
-#     return render('my_places/navbar.html',{'nav_locations':nav_locations, 'nav_categories':nav_categories})

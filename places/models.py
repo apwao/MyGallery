@@ -151,16 +151,6 @@ class Image(models.Model):
         display_images method to display all the images saved in the database
         """
         cls.objects.all()
-        
-    
-    # @classmethod
-    # def filter_by_location(cls,location):
-    #     """
-    #     display_by_location method to display all the images in the
-    #     database associated with a specific location
-    #     """
-    #     # location=Location()
-    #     image_locations=cls.objects.filter(location=location)
     
     @classmethod
     def search_by_category(cls,category):
